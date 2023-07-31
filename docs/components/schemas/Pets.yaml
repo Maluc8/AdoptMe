@@ -1,0 +1,24 @@
+components:
+  schemas:
+    Pet:
+      type: object
+      properties:
+        name:
+          type: string
+          description: El nombre de la mascota.
+        specie:
+          type: string
+          description: La especie de la mascota.
+        birthDate:
+          type: string
+          format: date
+          description: La fecha de nacimiento de la mascota.
+        adopted:
+          type: boolean
+          description: Indica si la mascota ha sido adoptada o no.
+        owner:
+          type: string
+          description: El ID del propietario de la mascota (referencia a la entidad "Users").
+        image:
+          type: string
+          description: La URL de la imagen de la mascota.

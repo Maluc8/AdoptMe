@@ -1,0 +1,93 @@
+info:
+  version: '1.0.0'
+  title: API de Mascotas
+servers:
+  - url: /api
+paths:
+  /pets:
+    get:
+      summary: Obtener todas las mascotas
+      tags:
+        - Pets
+      description: Devuelve una lista de todas las mascotas registradas.
+      responses:
+        '200':
+          description: Éxito. Se devolvieron las mascotas correctamente.
+    post:
+      summary: Crear una nueva mascota
+      tags:
+        - Pets
+      description: Crea una nueva mascota y la asocia con un usuario (propietario).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pets.yaml'
+      responses:
+        '200':
+          description: Éxito. La mascota se creó correctamente y se devuelve su información.
+
+  '/pets/{pid}':
+    get:
+      summary: Obtener una mascota por su ID
+      tags:
+        - Pets
+      description: Devuelve los detalles de una mascota específica.
+      parameters:
+        - name: pid
+          in: path
+          description: ID de la mascota a obtener
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Éxito. Se devolvió la mascota correctamente.
+        '404':
+          description: Error. La mascota no fue encontrada.
+    put:
+      summary: Actualizar una mascota
+      tags:
+        - Pets
+      description: Actualiza los detalles de una mascota existente.
+      parameters:
+        - name: pid
+          in: path
+          description: ID de la mascota a actualizar
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: Content-Type
+          schema:
+            type: string
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pets.yaml'
+      responses:
+        '200':
+          description: Éxito. La mascota se actualizó correctamente.
+        '404':
+          description: Error. La mascota no fue encontrada.
+    delete:
+      summary: Eliminar una mascota
+      tags:
+        - Pets
+      description: Elimina permanentemente una mascota existente.
+      parameters:
+        - name: pid
+          in: path
+          description: ID de la mascota a eliminar
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Éxito. La mascota se eliminó correctamente.
+        '404':
+          description: Error. La mascota no fue encontrada.

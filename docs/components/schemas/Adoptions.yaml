@@ -1,0 +1,11 @@
+components:
+  schemas:
+    Adoption:
+      type: object
+      properties:
+        owner:
+          type: string
+          description: El ID del propietario de la adopción (referencia a la entidad "Users").
+        pet:
+          type: string
+          description: El ID de la mascota adoptada (referencia a la entidad "Pets").

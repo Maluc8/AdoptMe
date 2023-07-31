@@ -1,0 +1,62 @@
+openapi: 3.0.0
+info:
+  version: '1.0.0'
+  title: API de Adopciones
+servers:
+  - url: /api
+paths:
+  /adoptions:
+    get:
+      summary: Obtener todas las adopciones
+      tags:
+        - Adoptions
+      description: Devuelve una lista de todas las adopciones registradas.
+      responses:
+        '200':
+          description: Éxito. Se devolvieron las adopciones correctamente.
+
+  /adoptions/{aid}:
+    get:
+      summary: Obtener una adopción por su ID
+      tags:
+        - Adoptions
+      description: Devuelve los detalles de una adopción específica.
+      parameters:
+        - name: aid
+          in: path
+          description: ID de la adopción a obtener
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Éxito. Se devolvió la adopción correctamente.
+        '404':
+          description: Error. La adopción no fue encontrada.
+
+  /adoptions/{uid}/{pid}:
+    post:
+      summary: Crear una nueva adopción
+      tags:
+        - Adoptions
+      description: Crea una nueva adopción asociada a un usuario y una mascota.
+      parameters:
+        - name: uid
+          in: path
+          description: ID del usuario que adopta
+          required: true
+          schema:
+            type: string
+        - name: pid
+          in: path
+          description: ID de la mascota adoptada
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Éxito. La adopción se creó correctamente y se devuelve su información.
+        '404':
+          description: Error. El usuario o la mascota no fueron encontrados.
+        '400':
+          description: Error. La mascota ya está adoptada.

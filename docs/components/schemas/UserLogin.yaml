@@ -1,0 +1,15 @@
+components:
+  schemas:
+    UserLogin:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+          description: El correo electrónico del usuario para iniciar sesión.
+        password:
+          type: string
+          description: La contraseña del usuario para iniciar sesión.

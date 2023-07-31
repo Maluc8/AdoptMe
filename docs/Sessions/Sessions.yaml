@@ -1,0 +1,70 @@
+openapi: 3.0.0
+info:
+  version: '1.0.0'
+  title: API de Sesiones
+servers:
+  - url: /api
+paths:
+  /register:
+    post:
+      summary: Registrar un nuevo usuario
+      tags:
+        - Sessions
+      description: Registra un nuevo usuario en el sistema.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRegistration.yaml'
+      responses:
+        '200':
+          description: Éxito. El usuario se registró correctamente.
+
+  /login:
+    post:
+      summary: Iniciar sesión
+      tags:
+        - Sessions
+      description: Inicia sesión en el sistema.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLogin.yaml'
+      responses:
+        '200':
+          description: Éxito. Sesión iniciada correctamente.
+
+  /current:
+    get:
+      summary: Obtener información del usuario actual
+      tags:
+        - Sessions
+      description: Devuelve información del usuario actualmente autenticado.
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Éxito. Se devolvió la información del usuario actual.
+
+  /unprotectedLogin:
+    get:
+      summary: Iniciar sesión sin protección
+      tags:
+        - Sessions
+      description: Endpoint de prueba para iniciar sesión sin autenticación.
+      responses:
+        '200':
+          description: Éxito. Sesión iniciada correctamente (sin autenticación).
+
+  /unprotectedCurrent:
+    get:
+      summary: Obtener información del usuario sin protección
+      tags:
+        - Sessions
+      description: Endpoint de prueba para obtener información del usuario sin autenticación.
+      responses:
+        '200':
+          description: Éxito. Se devolvió la información del usuario actual (sin autenticación).
